@@ -1,24 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Board from './components/board';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [boardConfig, setBoardConfig] = useState({
+    row: 0,
+    column: 0,
+  });
+
+  useEffect(() => {
+    let rows = prompt('Number of rows');
+    let columns = prompt('Number of columns');
+    if(columns)setBoardConfig({ row: rows, column: columns });
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Board rows={boardConfig.row} columns={boardConfig.column} />
     </div>
   );
 }
