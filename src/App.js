@@ -7,17 +7,26 @@ function App() {
   const [boardConfig, setBoardConfig] = useState({
     row: 0,
     column: 0,
+    position: '',
   });
 
   useEffect(() => {
     let rows = prompt('Number of rows');
     let columns = prompt('Number of columns');
-    if(columns)setBoardConfig({ row: rows, column: columns });
+    let position = (Math.round(rows/2)+'_'+Math.round(columns/2)).toString();
+    if(columns && rows && position) {
+      setBoardConfig({ row: rows, column: columns, position: position });
+    }
   }, [])
 
   return (
     <div className="App">
-      <Board rows={boardConfig.row} columns={boardConfig.column} />
+      <Board 
+      rows={boardConfig.row} 
+      columns={boardConfig.column} 
+      position={boardConfig.position}
+      setBoardConfig={setBoardConfig}
+      boardConfig={boardConfig} />
     </div>
   );
 }
